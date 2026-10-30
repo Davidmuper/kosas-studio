@@ -1,11 +1,13 @@
-import  { redirectAlert} from "./alerts.js"
-import  { buscarUsuario } from "./data.js"
+import { redirectAlert } from "./alerts.js"
+import { buscarUsuario } from "./data.js"
+import { setLocalStorage } from "./local-storage.js"
 
 function iniciarSesion() {
     let correo = document.querySelector("#correo").value
     let clave = document.querySelector("#clave").value
     let usuario = buscarUsuario(correo, clave)
     if (usuario) {
+        setLocalStorage("usuario", usuario);
         redirectAlert("Bienvenido al sistema " + usuario.nombre, "success", "/pages/catalogo.html")
     } else {
         redirectAlert("Error de credenciales", "error", "/index.html")
